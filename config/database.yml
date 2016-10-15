@@ -46,10 +46,5 @@ test:
 # You can use this database configuration with:
 #
 production:
+  <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-#
-#production:
-#  <<: *default
-#  database: aclx_production
-#  username: aclx
-#  password: <%= ENV['ACLX_DATABASE_PASSWORD'] %>
