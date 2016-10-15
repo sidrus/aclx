@@ -31,6 +31,6 @@ class User < ApplicationRecord
 
 	private
 	def user_params
-	  params.require(:user).permit(:aclx_id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity)
+	  params.require(:user).permit(:aclx_id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership)
 	end
 end

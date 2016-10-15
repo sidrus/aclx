@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       @users = User.all
     end
 
-    @users = @users.paginate(:page => params[:page], :per_page => 5)
+    @users = @users.order(:aclx_id).paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /users/1
@@ -48,7 +48,8 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        flash[:notice] = 'User was successfully updated.'
+        format.html { render :edit }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -89,6 +90,12 @@ class UsersController < ApplicationController
   def import_show    
   end
 
+  # returns a list of leadership users
+  def leadership
+    @users = User.where(is_leadership: true).order(:aclx_id).paginate(:page => params[:page], :per_page => 5)
+    render :index
+  end
+
   def print
     @user = User.find(params[:id])
     
@@ -103,6 +110,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity)
+      params.require(:user).permit(:id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership, :aclx_id)
     end
 end
