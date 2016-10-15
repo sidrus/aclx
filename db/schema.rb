@@ -12,11 +12,14 @@
 
 ActiveRecord::Schema.define(version: 20161007045009) do
 
-  create_table "car_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "car_types", force: :cascade do |t|
     t.string "name"
   end
 
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "users", force: :cascade do |t|
     t.integer  "aclx_id"
     t.boolean  "id_issued"
     t.string   "forum_name"
@@ -25,10 +28,10 @@ ActiveRecord::Schema.define(version: 20161007045009) do
     t.string   "vehicle_desc"
     t.date     "date_joined"
     t.boolean  "has_facebook"
-    t.text     "comments",      limit: 65535
+    t.text     "comments"
     t.date     "last_activity"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.integer  "type"
   end
 
