@@ -45,7 +45,6 @@ group :development do
 end
 
 # Custom Gems
-gem 'rails_12factor'
 gem 'roo'
 gem "iconv"
 gem 'rails_lookup'
