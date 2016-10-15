@@ -4,7 +4,13 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if params[:search] then
+      @users = User.where("(lower(full_name) LIKE :search) OR (lower(forum_name) LIKE :search)", search: "%#{params[:search]}%".downcase)
+    else
+      @users = User.all
+    end
+
+    @users = @users.paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /users/1
@@ -69,6 +75,10 @@ class UsersController < ApplicationController
     rescue Exception => e
       redirect_to users_url, :flash => {error: "Member imported failed. #{e.message}"}
     end
+  end
+
+  # shows the user import view
+  def import_show    
   end
 
   def print

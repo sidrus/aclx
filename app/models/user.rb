@@ -6,9 +6,12 @@ class User < ApplicationRecord
 	  header = spreadsheet.row(1)
 	  (2..spreadsheet.last_row).each do |i|
 	    row = Hash[[header, spreadsheet.row(i)].transpose]
-	    user = find_by_id(row["aclx_id"]) || new
+	    user = find_by_aclx_id(row["aclx_id"]) || new
 	    user.attributes = row.to_hash
-	    user.save!
+
+	    if !user.full_name.nil? then
+	    	user.save!
+	    end
 	  end
 	end
 

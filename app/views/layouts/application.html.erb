@@ -20,6 +20,14 @@
     <%= render partial: "layouts/nav" %>
 
     <div class="container">
+      <% if flash[:notice] then %>
+        <p id="notice" class="alert alert-success"><%= flash[:notice] %></p>
+      <% end %>
+
+      <% if flash[:error] then %>
+        <p id="error" class="alert alert-warning"><%= flash[:error] %></p>
+      <% end %>
+      
       <%= yield %>
     </div>
   </body>
