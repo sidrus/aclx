@@ -11,9 +11,9 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
+//= require jquery.matchHeight
+//= require jquery.quickfit
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-//= require jquery.matchHeight
-//= require jquery.quickfit
-//= require controls

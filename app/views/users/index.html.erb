@@ -1,42 +1,7 @@
-<% if flash[:notice] then %>
-  <p id="notice" class="alert alert-success"><%= flash[:notice] %></p>
-<% end %>
+<h1>Member List <small>(<%= pluralize(@users.all.count, "member").titleize %>)</small></h1>
 
-<% if flash[:error] then %>
-  <p id="error" class="alert alert-warning"><%= flash[:error] %></p>
-<% end %>
-
-<h1>Member List</h1>
-
-<div class="card card-info card-inverse">
-  <h6 class="card-header">Import Members</h6>
-  <div class="card-block">
-    <%= form_tag import_users_path, multipart: true do %>
-      <div class="row">
-        <div class="col-xs-9 col-md-11">
-          <div class="input-group">
-            <label class="input-group-btn">
-              <span class="btn btn-default">
-                Browse&hellip; <%= file_field_tag :file, style: "display: none;" %>
-              </span>
-            </label>
-            <input type="text" class="form-control" readonly />
-          </div>
-        </div>
-        <div class="col-xs-3 col-md-1 text-right">
-          <div>
-            <%= submit_tag "Import", class: "btn btn-primary" %>
-          </div>
-        </div>
-      </div>
-    <% end %>
-  </div>
-</div>
-<br />
-
-
+<%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
 <%= render partial: "user_row", locals: {users: @users} %>
-
-<br>
+<%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
 
 <%= link_to 'Add Member', new_user_path, class: "btn btn-default" %>
