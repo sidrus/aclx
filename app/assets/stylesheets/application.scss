@@ -1,9 +1,13 @@
 @import "font-awesome/css/font-awesome.min.css";
 
-@media all and (max-width: 700px)
-{
-    .jumbotron-page
-    {
-        height: 100px;
+
+.pagination {
+  @media (max-width: 480px) {
+    li { 
+      display: none;
+      &.active, &.prev, &.next {
+        display: inline
+      }
     }
+  }
 }

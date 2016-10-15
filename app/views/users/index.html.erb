@@ -4,4 +4,5 @@
 <%= render partial: "user_row", locals: {users: @users} %>
 <%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
 
+<br />
 <%= link_to 'Add Member', new_user_path, class: "btn btn-default" %>
