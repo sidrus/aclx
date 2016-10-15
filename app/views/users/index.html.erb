@@ -1,8 +1,15 @@
 <h1>Member List <small>(<%= pluralize(@users.all.count, "member").titleize %>)</small></h1>
 
-<%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
+
+<div class="text-center">
+  <%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
+</div>
+
 <%= render partial: "user_row", locals: {users: @users} %>
-<%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
+
+<div class="text-center">
+  <%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
+</div>
 
 <br />
 <%= link_to 'Add Member', new_user_path, class: "btn btn-default" %>
