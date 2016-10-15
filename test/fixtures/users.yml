@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  id_issued: false
+  forum_name: MyString
+  full_name: MyString
+  email: MyString
+  vehicle_desc: MyString
+  date_joined: 2016-09-24
+  has_facebook: false
+  comments: MyText
+  last_activity: 2016-09-24
+
+two:
+  id: 1
+  id_issued: false
+  forum_name: MyString
+  full_name: MyString
+  email: MyString
+  vehicle_desc: MyString
+  date_joined: 2016-09-24
+  has_facebook: false
+  comments: MyText
+  last_activity: 2016-09-24

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ID Card for <%= @user.full_name %></title>
+    <%= csrf_meta_tags %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <%= stylesheet_link_tag 'print_userid', media: 'all', 'data-turbolinks-track': 'reload' %> 
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>    
+  </head>
+
+  <body>
+    <%= yield %>
+
+    <script type="text/javascript">
+      $(function() {
+        $('.quickfit').quickfit({
+          width: 210,
+          min: 12,
+          max: 24
+        });
+      });
+    </script>
+  </body>
+</html>

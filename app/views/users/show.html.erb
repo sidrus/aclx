@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @user.id %>
+</p>
+
+<p>
+  <strong>Id issued:</strong>
+  <%= @user.id_issued %>
+</p>
+
+<p>
+  <strong>Forum name:</strong>
+  <%= @user.forum_name %>
+</p>
+
+<p>
+  <strong>Full name:</strong>
+  <%= @user.full_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+
+<p>
+  <strong>Vehicle desc:</strong>
+  <%= @user.vehicle_desc %>
+</p>
+
+<p>
+  <strong>Date joined:</strong>
+  <%= @user.date_joined %>
+</p>
+
+<p>
+  <strong>Has facebook:</strong>
+  <%= @user.has_facebook %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @user.comments %>
+</p>
+
+<p>
+  <strong>Last activity:</strong>
+  <%= @user.last_activity %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

@@ -1,0 +1,57 @@
+<% users.each do |user| %>
+  
+  <% status = get_display_status(user) %>
+
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <h3 class="panel-title">
+          <div class="text-left col-xs-6">
+            <%= link_to user.full_name, user %><br />
+            <small><span class="text-muted">(Member #: <%= user.aclx_id %>)</span></small>
+          </div>          
+        </h3>
+
+        <div class="text-right col-xs-6">
+          <span class="label label-<%= status %>"><%= user.forum_name || "No Forum Name" %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel-body">
+        <%= user.vehicle_desc || "No vehicle information." %><br />
+        <% split_email(user).each do |email| %>
+          <%= mail_to(email) %><br />
+        <% end %>
+        <hr />
+        <%= user.comments || "No notes entered." %>
+    </div>
+
+    <div class="panel-footer">
+      <div class="row">
+        <div class="col-xs-7">
+
+          <!-- ID ISSUED -->
+          <span class="label label-<%= status %>">
+            <%= link_to user.id_issued ? "ID Issued" : "Missing ID", print_path(user), :target => "_blank" %>
+          </span>
+
+          <!-- HAS FACEBOOK -->
+          <% if user.has_facebook then %>
+            <div class="btn btn-xs btn-social-icon btn-facebook">
+              <span class="fa fa-facebook"></span>
+            </div>
+          <% end %>
+
+        </div>
+        <div class="col-xs-5 text-right">
+          <small>
+            <i>Member Since:<br /><%= user.date_joined && user.date_joined.to_s(:long) || "Unknown" %></i>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+<% end %>
