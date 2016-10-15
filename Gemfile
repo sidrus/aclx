@@ -50,5 +50,8 @@ gem "iconv"
 gem 'rails_lookup'
 gem 'rqrcode'
 gem 'rqrcode_png'
+gem 'jquery-turbolinks'
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
 
 ruby "2.3.1"

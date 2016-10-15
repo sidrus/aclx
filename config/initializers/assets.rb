@@ -15,3 +15,5 @@ Rails.application.config.assets.precompile += %w( bootstrap-social.css )
 Rails.application.config.assets.precompile += %w( bootstrap.min.css )
 Rails.application.config.assets.precompile += %w( print_userid.css )
 Rails.application.config.assets.precompile += %w( font-awesome/css/font-awesome.min.css )
+
+Rails.application.config.assets.precompile += %w( controls.js )
