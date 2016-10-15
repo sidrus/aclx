@@ -12,8 +12,7 @@
 default: &default
   adapter: postgresql
   encoding: utf8
-  pool: 5  
-  socket: /var/run/mysqld/mysqld.sock
+  pool: 5
 
 development:
   <<: *default
