@@ -1,0 +1,182 @@
+@media print {
+  /* line 2, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+  body {
+    -webkit-print-color-adjust: exact;
+  }
+}
+/* line 5, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+body {
+  font-family: 'Liberation Sans';
+  font-weight: bold;
+  font-style: normal;
+  text-align: center;
+}
+
+/* line 13, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.id-container {
+  display: inline-block;
+  width: 2.25in;
+  height: 3.5in;
+  background-color: #0100FB;
+  border: 1px solid black;
+  overflow: hidden;
+}
+
+/* line 24, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.front-content {
+  position: relative;
+  top: 0.5in;
+  /* 48px */
+  height: 2.75in;
+  /* 264px */
+  background-color: #FFF;
+}
+
+/* line 31, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.back-content {
+  background-color: #FFF;
+  height: 100%;
+}
+
+/* line 36, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.name {
+  font-size: 18pt;
+  font-size: calc(216/4.32);
+  height: 40px;
+  white-space: nowrap;
+}
+
+/* line 44, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.vertical-center {
+  vertical-align: middle;
+}
+
+/* line 48, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.logo {
+  width: 100%;
+  height: 120px;
+  /*background-image: image-url('new-logo-id-cropped');*/
+  background-image: url(/assets/current-logo-id-eefe789ddb37b1f49dc349d4fd783ffa53ee40b6fc6b34455ed18c7fec38b222.jpg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  top: 40px;
+}
+
+/* line 62, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.username {
+  font-size: 14pt;
+  position: absolute;
+  top: 168px;
+  width: 100%;
+  height: 30px;
+}
+
+/* line 71, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.vehicle {
+  height: 0.5in;
+  font-size: 9pt;
+  position: absolute;
+  top: 198px;
+  width: 100%;
+  height: 50px;
+}
+
+/* line 81, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.footer {
+  position: absolute;
+  top: 248px;
+  width: 100%;
+  height: 16px;
+}
+
+/* line 89, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.join-date {
+  font-size: 6pt;
+  display: inline;
+  width: 75%;
+  text-align: left;
+  float: left;
+  margin-left: 3px;
+  margin-right: -3px;
+}
+
+/* line 100, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.qr-code {
+  display: inline;
+  width: 25%;
+  text-align: right;
+  float: right;
+  margin-top: -27px;
+}
+
+/* QR Code CSS */
+/* line 110, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+table {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
+}
+
+/* line 117, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+td {
+  border-left: solid 10px #000;
+  padding: 0;
+  margin: 0;
+  width: 0px;
+  height: 10px;
+}
+
+/* line 125, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+td.black {
+  border-color: #000;
+}
+
+/* line 126, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+td.white {
+  border-color: #fff;
+}
+
+/*
+ *  BACK COVER
+ *  ALAMO CITY LX MODERN MOPAR
+ */
+/* line 132, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.vertical-image {
+  width: 1.125in;
+  height: 3.5in;
+  display: inline;
+}
+
+/* line 139, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.acl {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(/assets/aclx-text-1-dd428943701a5a56bf6fb9ade66889ad01da405d86cb4d5cf062a631314ea211.png);
+  float: left;
+  margin-top: -1.125in;
+  margin-left: 20px;
+}
+
+/* line 151, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.mm {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url(/assets/aclx-text-2-6261744f2446ee1d0033e2fcd5700954cc9e8b8c45adc3fe895eb8a38a0382b4.png);
+  float: right;
+  margin-top: 1.125in;
+  margin-right: 20px;
+}
+
+/* line 163, /home/brandon/projects/aclx/app/assets/stylesheets/print_userid.css.scss */
+.rotate90 {
+  height: 1.125in;
+  width: 2.5in;
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
