@@ -1,7 +1,0 @@
-@import url(font-awesome/css/font-awesome.min.css);
-@media all and (max-width: 700px) {
-  /* line 5, /home/brandon/projects/aclx/app/assets/stylesheets/application.css.scss */
-  .jumbotron-page {
-    height: 100px;
-  }
-}
