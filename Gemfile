@@ -50,3 +50,5 @@ gem "iconv"
 gem 'rails_lookup'
 gem 'rqrcode'
 gem 'rqrcode_png'
+
+ruby "2.3.1"
