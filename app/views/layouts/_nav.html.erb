@@ -19,6 +19,7 @@
         <li><a href="http://www.forum.alamocitylx.org">Forum</a></li>
         <ul class="nav navbar-nav">
           <li><%= link_to("Import members...", import_show_users_path) %></li>
+          <li><%= link_to("Delete all...", destroy_all_users_path, method: :delete) %></li>
         </ul>
       </ul>
 

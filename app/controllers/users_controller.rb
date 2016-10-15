@@ -67,6 +67,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy_all
+    User.delete_all
+    respond_to do |format|
+      format.html { redirect_to users_url, notice: 'All users were successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
   # imports a list of users from a CSV or Excel file
   def import
     begin
