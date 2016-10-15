@@ -53,5 +53,6 @@ gem 'rqrcode_png'
 gem 'jquery-turbolinks'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'bootstrap_form'
 
 ruby "2.3.1"

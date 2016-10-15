@@ -1,53 +1,37 @@
-<p>
-  <strong>Id:</strong>
-  <%= @user.id %>
-</p>
+<dl class="dl-horizontal">
+  <dt>Id:</dt>
+  <dd><%= @user.aclx_id %></dd>
 
-<p>
-  <strong>Id issued:</strong>
-  <%= @user.id_issued %>
-</p>
+  <dt>Id Issued:</dt>
+  <dd><%= @user.id_issued %></dd>
 
-<p>
-  <strong>Forum name:</strong>
-  <%= @user.forum_name %>
-</p>
+  <dt>Forum name:</dt>
+  <dd><%= @user.forum_name %></dd>
 
-<p>
-  <strong>Full name:</strong>
-  <%= @user.full_name %>
-</p>
+  <dt>Full name:</dt>
+  <dd><%= @user.full_name %></dd>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <dt>Email:</dt>
+  <dd><%= @user.email %></dd>
 
-<p>
-  <strong>Vehicle desc:</strong>
-  <%= @user.vehicle_desc %>
-</p>
+  <dt>Vehicle desc:</dt>
+  <dd><%= @user.vehicle_desc %></dd>
 
-<p>
-  <strong>Date joined:</strong>
-  <%= @user.date_joined %>
-</p>
+  <dt>Date joined:</dt>
+  <dd><%= @user.date_joined %></dd>
 
-<p>
-  <strong>Has facebook:</strong>
-  <%= @user.has_facebook %>
-</p>
+  <dt>Has facebook:</dt>
+  <dd><%= @user.has_facebook %></dd>
 
-<p>
-  <strong>Comments:</strong>
-  <%= @user.comments %>
-</p>
+  <dt>Comments:</dt>
+  <dd><%= @user.comments %></dd>
 
-<p>
-  <strong>Last activity:</strong>
-  <%= @user.last_activity %>
-</p>
+  <dt>Last activity:</dt>
+  <dd><%= @user.last_activity %></dd>
+</dl>
 
-<%= link_to 'Delete', user_path(@user), method: :delete, data: {confirm: "Are you sure?"} %>
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<div class="row text-center">
+  <%= link_to 'Delete', user_path(@user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-default" %>
+  <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-default" %>
+  <%= link_to 'Back', users_path, class: "btn btn-default" %>
+</div>

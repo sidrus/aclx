@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
 
   get '/print/:id', :to => 'users#print', :as => 'print'
+  get '/leadership', :to => 'users#leadership'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
