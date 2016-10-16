@@ -104,7 +104,11 @@ class UsersController < ApplicationController
     if !@session then
       return redirect_to users_url, :flash => { error: "Failed to create Google Drive session." }
     else
-      @aclx_files = @session.collection_by_title("ACLX")
+      if @session && @session.collection_by_title("ACLX") then
+        @aclx_files = @session.collection_by_title("ACLX")
+      else
+        return redirect_to users_url, :flash => { error: "Google Drive session created, but collection_by_title failed to execute." }
+      end
     end
   end
 
