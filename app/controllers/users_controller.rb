@@ -100,9 +100,9 @@ class UsersController < ApplicationController
     session = create_google_session
 
     if !session.is_a? GoogleDrive::Session then
-      return redirect_to users_url, :flash => {error: "Unexpected session data: #{session}"}
+      return flash[:error] = "Unexpected session data: #{session}"
     else
-      @aclx_files = session.collection_by_title("ACLX")
+      return @aclx_files = session.collection_by_title("ACLX")
     end
   end
 
