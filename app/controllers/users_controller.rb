@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     if params[:search] then
       @users = User.where("(lower(full_name) LIKE :search) OR (lower(forum_name) LIKE :search)", search: "%#{params[:search]}%".downcase)
     else
-      @users = User.all
+      @users = User.all.where(inactive: false)
     end
 
     @users = @users.order(:aclx_id).paginate(:page => params[:page], :per_page => 5)
@@ -47,9 +47,8 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        flash[:notice] = 'User was successfully updated.'
-        format.html { render :edit }
+      if @user.update(user_params)        
+        format.html { redirect_to edit_user_path(@user), notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -110,6 +109,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership, :aclx_id)
+      params.require(:user).permit(:id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership, :aclx_id, :inactive)
     end
 end
