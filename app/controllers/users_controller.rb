@@ -100,7 +100,7 @@ class UsersController < ApplicationController
     require "googleauth"
 
     if !@session then
-      redirect_to users_url, error: "Failed to create Google Drive session."
+      redirect_to users_url, :flash => { error: "Failed to create Google Drive session." }
       return
     end
     
