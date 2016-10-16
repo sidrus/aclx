@@ -3,6 +3,10 @@ Rails.application.routes.draw do
     collection do 
       post :import
       get :import_show
+
+      get :import_google
+      post :import_google
+
       delete :destroy_all
     end
   end

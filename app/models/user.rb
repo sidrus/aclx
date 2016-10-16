@@ -1,15 +1,26 @@
 require 'base64'
 
 class User < ApplicationRecord
-	def self.import(file)
-	  spreadsheet = open_spreadsheet(file)
-	  header = spreadsheet.row(1)
+	def self.import_from_upload(file)
+		spreadsheet = open_spreadsheet(file)
+	  import(spreadsheet)
+	end
+
+	def self.import_from_google(file)
+		file.export_as_file('members_temp.xlsx')
+		spreadsheet = Roo::Excelx.new('members_temp.xlsx')
+		import(spreadsheet)
+	end
+
+	def self.import(spreadsheet)
+		header = spreadsheet.row(1)
 	  (2..spreadsheet.last_row).each do |i|
 	    row = Hash[[header, spreadsheet.row(i)].transpose]
 	    user = find_by_aclx_id(row["aclx_id"]) || new
 	    user.attributes = row.to_hash
 
 	    if !user.full_name.nil? then
+	    	user.inactive = user.inactive || false
 	    	user.save!
 	    end
 	  end
@@ -30,7 +41,7 @@ class User < ApplicationRecord
 	end
 
 	private
-	def user_params
-	  params.require(:user).permit(:aclx_id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership)
-	end
+		def user_params
+		  params.require(:user).permit(:aclx_id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership)
+		end
 end
