@@ -78,15 +78,29 @@ class UsersController < ApplicationController
   # imports a list of users from a CSV or Excel file
   def import
     begin
-      User.import(params[:file])
+      if params[:file].is_a? String then
+        session = create_google_session
+        file = session.file_by_url(params[:file])
+        User.import_from_google(file)
+      else
+        User.import_from_upload(params[:file])
+      end
+      
       redirect_to users_url, notice: "Member list imported."
     rescue Exception => e
-      redirect_to users_url, :flash => {error: "Member imported failed. #{e.message}"}
+      redirect_to users_url, :flash => {error: "Member imported failed.<br />#{e.message}')}"}
     end
   end
 
   # shows the user import view
   def import_show    
+  end
+
+  def import_google
+    require "googleauth"
+
+    @session = create_google_session
+    @aclx_files = @session.collection_by_title("ACLX")
   end
 
   # returns a list of leadership users
@@ -110,5 +124,35 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership, :aclx_id, :inactive)
+    end
+
+    def create_google_session
+      # create a new OAuth credential
+      credentials = Google::Auth::UserRefreshCredentials.new(
+        client_id: Rails.application.secrets[:google][:client_id],
+        client_secret: Rails.application.secrets[:google][:client_secret],
+        scope: [
+          "https://www.googleapis.com/auth/drive",
+          "https://spreadsheets.google.com/feeds/",
+        ],
+        redirect_uri: "http://localhost:3000/users/import_google"
+      )
+      
+      if session[:google_auth_token] && !session[:google_auth_token].nil? then
+        credentials.refresh_token = session[:google_auth_token]      
+      else
+        if params[:code].nil? then
+          auth_url = credentials.authorization_uri
+          redirect_to auth_url.to_s
+          return
+        else
+          credentials.code = params[:code]          
+        end
+      end
+
+      credentials.fetch_access_token!
+      session[:google_auth_token] = credentials.refresh_token
+
+      session = GoogleDrive::Session.from_credentials(credentials)
     end
 end

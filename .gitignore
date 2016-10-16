@@ -19,3 +19,6 @@
 # Custom ignore files
 config/secrets.*
 config/database.yml
+
+# other
+*.xls*
