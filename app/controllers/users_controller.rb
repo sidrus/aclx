@@ -103,9 +103,9 @@ class UsersController < ApplicationController
 
     if !@session then
       return redirect_to users_url, :flash => { error: "Failed to create Google Drive session." }
+    else
+      @aclx_files = @session.collection_by_title("ACLX")
     end
-    
-    @aclx_files = @session.collection_by_title("ACLX")
   end
 
   # returns a list of leadership users
