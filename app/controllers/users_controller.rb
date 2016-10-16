@@ -101,6 +101,7 @@ class UsersController < ApplicationController
 
     if !@session then
       redirect_to users_url, error: "Failed to create Google Drive session."
+      return
     end
     
     @aclx_files = @session.collection_by_title("ACLX")
