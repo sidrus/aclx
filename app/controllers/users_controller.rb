@@ -86,9 +86,9 @@ class UsersController < ApplicationController
         User.import_from_upload(params[:file])
       end
       
-      redirect_to users_url, notice: "Member list imported."
+      return redirect_to users_url, notice: "Member list imported."
     rescue Exception => e
-      redirect_to users_url, :flash => {error: "Member imported failed.<br />#{e.message}')}"}
+      return redirect_to users_url, :flash => {error: "Member imported failed.<br />#{e.message}')}"}
     end
   end
 
