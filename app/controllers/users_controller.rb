@@ -98,7 +98,12 @@ class UsersController < ApplicationController
 
   def import_google
     session = create_google_session
-    @aclx_files = session.collection_by_title("ACLX")
+
+    if session.is_a? String then
+      return redirect_to users_url, :flash => {error: "Unexpected session data: #{session}"}
+    else
+      @aclx_files = session.collection_by_title("ACLX")
+    end
   end
 
   # returns a list of leadership users
