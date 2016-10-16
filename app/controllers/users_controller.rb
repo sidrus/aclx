@@ -99,10 +99,8 @@ class UsersController < ApplicationController
   def import_google
     require "googleauth"
 
-    @session = create_google_session
-
     if !@session then
-      raise "Failed to create Google Drive session."
+      redirect_to users_url, error: "Failed to create Google Drive session."
     end
     
     @aclx_files = @session.collection_by_title("ACLX")
