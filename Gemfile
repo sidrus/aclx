@@ -53,4 +53,7 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap_form'
 
+gem 'google_drive'
+#gem 'roo-google'
+
 ruby "2.3.1"

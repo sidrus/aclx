@@ -22,7 +22,8 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member Management <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><%= link_to("New Member", new_user_path) %></li>
-            <li><%= link_to("Import members...", import_show_users_path) %></li>
+            <li><%= link_to("Import from local system", import_show_users_path) %></li>
+            <li><%= link_to("Import from Google", import_google_users_path) %></li>
             <li><%= link_to("Delete all...", destroy_all_users_path, method: :delete, data: {confirm: "Are you sure?"}) %></li>
           </ul>
         </li>
