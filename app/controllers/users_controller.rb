@@ -100,6 +100,11 @@ class UsersController < ApplicationController
     require "googleauth"
 
     @session = create_google_session
+
+    if !@session then
+      raise "Failed to create Google Drive session."
+    end
+    
     @aclx_files = @session.collection_by_title("ACLX")
   end
 
