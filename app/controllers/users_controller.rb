@@ -102,8 +102,7 @@ class UsersController < ApplicationController
     @session = create_google_session
 
     if !@session then
-      flash[:error] = "Failed to create Google Drive session."
-      return
+      return redirect_to users_url, :flash => { error: "Failed to create Google Drive session." }
     end
     
     @aclx_files = @session.collection_by_title("ACLX")
@@ -149,8 +148,7 @@ class UsersController < ApplicationController
       else
         if params[:code].nil? then
           auth_url = credentials.authorization_uri
-          redirect_to auth_url.to_s
-          return
+          return redirect_to auth_url.to_s
         else
           credentials.code = params[:code]          
         end
