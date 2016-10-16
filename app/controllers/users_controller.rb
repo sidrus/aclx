@@ -129,13 +129,13 @@ class UsersController < ApplicationController
     def create_google_session
       # create a new OAuth credential
       credentials = Google::Auth::UserRefreshCredentials.new(
-        client_id: Rails.application.secrets[:google][:client_id],
-        client_secret: Rails.application.secrets[:google][:client_secret],
+        client_id: Rails.application.secrets[:google][:client_id] || ENV["google_client_id"] ,
+        client_secret: Rails.application.secrets[:google][:client_secret] || ENV["google_client_secret"],
         scope: [
           "https://www.googleapis.com/auth/drive",
           "https://spreadsheets.google.com/feeds/",
         ],
-        redirect_uri: "http://localhost:3000/users/import_google"
+        redirect_uri: ENV["google_redirect_uri"] || "http://localhost:3000/users/import_google"
       )
       
       if session[:google_auth_token] && !session[:google_auth_token].nil? then
