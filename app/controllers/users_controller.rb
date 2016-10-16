@@ -97,19 +97,8 @@ class UsersController < ApplicationController
   end
 
   def import_google
-    require "googleauth"
-
-    @session = create_google_session
-
-    if !@session then
-      return redirect_to users_url, :flash => { error: "Failed to create Google Drive session." }
-    else
-      begin
-        @aclx_files = @session.collection_by_title("ACLX")
-      rescue Exception => e
-        return redirect_to users_url, :flash => { error: "Google Drive session created, but encountered the following error: #{e.message}" }
-      end
-    end
+    session = create_google_session
+    @aclx_files = session.collection_by_title("ACLX")
   end
 
   # returns a list of leadership users
@@ -136,6 +125,8 @@ class UsersController < ApplicationController
     end
 
     def create_google_session
+      require "googleauth"
+
       # create a new OAuth credential
       credentials = Google::Auth::UserRefreshCredentials.new(
         client_id: ENV["google_client_id"] || Rails.application.secrets[:google][:client_id],
