@@ -30,26 +30,28 @@
 
     <div class="panel-footer">
       <div class="row">
-        <div class="col-xs-7">
+        <div class="col-xs-7 col-md-9">
+          <% if user.inactive then %>
+            <span class="glyphicon glyphicon-alert text-warning buffer-badges"></span>
+          <% end %>
 
           <!-- ID ISSUED -->
-          <span class="label label-<%= status %>">
-            <%= link_to user.id_issued ? "ID Issued" : "Missing ID", print_path(user), :target => "_blank" %>
+          <span class="label label-<%= status %> buffer-badges">
+            <%= link_to user.id_issued ? "ID Issued" : "Missing ID", print_path(user), :target => "_blank" %>            
           </span>
 
           <!-- HAS FACEBOOK -->
           <% if user.has_facebook then %>
-            <div class="btn btn-xs btn-social-icon btn-facebook">
+            <div class="btn btn-xs btn-social-icon btn-facebook buffer-badges">
               <span class="fa fa-facebook"></span>
             </div>
           <% end %>
 
           <% if user.is_leadership then %>
-            <span class="label label-info">LST</span>
+            <span class="label label-info buffer-badges">LST</span>
           <% end %>
-
         </div>
-        <div class="col-xs-5 text-right">
+        <div class="col-xs-5 col-md-3 text-right">
           <small>
             <i>Member Since:<br /><%= user.date_joined && user.date_joined.to_s(:long) || "Unknown" %></i>
           </small>
