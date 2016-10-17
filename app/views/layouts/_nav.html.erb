@@ -21,19 +21,51 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Member Management <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><%= link_to("New Member", new_user_path) %></li>
-            <li><%= link_to("Import from local system", import_show_users_path) %></li>
-            <li><%= link_to("Import from Google", import_google_users_path) %></li>
-            <li><%= link_to("Delete all...", destroy_all_users_path, method: :delete, data: {confirm: "Are you sure?"}) %></li>
+            <!-- CREATE USER  -->
+            <li>
+              <%= link_to new_user_path do %>
+                <span class="glyphicon glyphicon-user"></span>
+                &nbsp;Add Member
+              <% end %>
+            </li>
+
+            <!-- IMPORT FUNCTIONS  -->
+            <li role="presentation" class="divider"></li>
+            <li>
+              <%= link_to(import_show_users_path) do %>
+                <span class="glyphicon glyphicon-import text-default"></span>
+                &nbsp;Import from local system
+              <% end %>
+            </li>
+            <li>
+              <%= link_to(import_google_users_path) do %>
+                <span class="fa fa-google text-success"></span>
+                &nbsp;Import from Google
+              <% end %>
+            </li>
+
+            <!-- DELETE ALL!!!  -->
+            <li role="presentation" class="divider"></li>
+            <li>              
+              <%= link_to(destroy_all_users_path, method: :delete, :data => {confirm: "This is a destructive operation.  Are you sure?"}, class: "text-center") do %>
+                <span class="glyphicon glyphicon-alert text-danger pull-left"></span>
+                Delete All
+                <span class="glyphicon glyphicon-alert text-danger pull-right"></span>
+              <% end %>
+            </li>
           </ul>
         </li>
       </ul>
 
       <!-- SEARCH BAR -->
       <%= form_tag users_path, method: :get, class: "navbar-form navbar-right" do %>
-        <div class="form-group">
+        <div class="input-group">
           <%= text_field_tag 'search', nil, placeholder: "Search...", class: "form-control" %>
-          <%= submit_tag "Search", class: "btn btn-default" %>
+          <span class="input-group-btn">
+            <%= button_tag("", class: "btn btn-default", type: :submit) do %>
+              <span class="glyphicon glyphicon-search"></span>
+            <% end %>
+          </span>
         </div>
       <% end %>
     </div><!-- /.navbar-collapse -->
