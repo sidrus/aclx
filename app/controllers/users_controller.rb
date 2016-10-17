@@ -132,31 +132,31 @@ class UsersController < ApplicationController
     def create_google_session
       require "googleauth"
 
-      # create a new OAuth credential
-      credentials = Google::Auth::UserRefreshCredentials.new(
-        client_id: ENV["google_client_id"] || Rails.application.secrets[:google][:client_id],
-        client_secret: ENV["google_client_secret"] || Rails.application.secrets[:google][:client_secret],
-        scope: [
-          "https://www.googleapis.com/auth/drive",
-          "https://spreadsheets.google.com/feeds/",
-        ],
-        redirect_uri: ENV["google_redirect_uri"] || "http://localhost:3000/users/import_google")
-      
-      if session[:google_auth_token].present? then
-        credentials.refresh_token = session[:google_auth_token]      
+      if session[:google_credentials].present? then
+        credentials = session[:google_credentials]
       else
+        # create a new OAuth credential
+        credentials = Google::Auth::UserRefreshCredentials.new(
+          client_id: ENV["google_client_id"] || Rails.application.secrets[:google][:client_id],
+          client_secret: ENV["google_client_secret"] || Rails.application.secrets[:google][:client_secret],
+          scope: [
+            "https://www.googleapis.com/auth/drive",
+            "https://spreadsheets.google.com/feeds/",
+          ],
+          redirect_uri: ENV["google_redirect_uri"] || "http://localhost:3000/users/import_google")
+        
+        # Google redirects back to /users/google_import, so on the return
+        # we'll have a code string to use.
         if params[:code].present? then
-          credentials.code = params[:code]
+            credentials.code = params[:code]
         else
-          p "Session variable: #{session[:google_auth_token]}"
-          p "Need credentials"
           auth_url = credentials.authorization_uri
           redirect_to auth_url.to_s and return
         end
-      end
 
-      credentials.fetch_access_token!
-      session[:google_auth_token] = credentials.refresh_token
+        credentials.fetch_access_token!
+        session[:google_credentials] = credentials
+      end
 
       google = GoogleDrive::Session.from_credentials(credentials)
     end

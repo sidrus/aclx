@@ -54,6 +54,6 @@ gem 'will_paginate-bootstrap'
 gem 'bootstrap_form'
 
 gem 'google_drive'
-#gem 'roo-google'
+gem 'activerecord-session_store'
 
 ruby "2.3.1"
