@@ -101,7 +101,9 @@ class UsersController < ApplicationController
   end
 
   def import_google
-    session = create_google_session    
+    session = create_google_session
+    return if session.nil?
+    
     @aclx_files = session.collection_by_title("ACLX")
   end
 
