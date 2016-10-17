@@ -148,6 +148,8 @@ class UsersController < ApplicationController
         if params[:code].present? then
           credentials.code = params[:code]
         else
+          p "Session variable: #{session[:google_auth_token]}"
+          p "Need credentials"
           auth_url = credentials.authorization_uri
           redirect_to auth_url.to_s and return
         end
