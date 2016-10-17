@@ -86,9 +86,13 @@ class UsersController < ApplicationController
         User.import_from_upload(params[:file])
       end
       
-      return redirect_to users_url, notice: "Member list imported."
+      respond_to do  |format|
+        format.html { redirect_to users_url, notice: "Member list imported." }
+      end
     rescue Exception => e
-      return redirect_to users_url, :flash => {error: "Member imported failed.<br />#{e.message}')}"}
+      respond_to do |format|
+        format.html {redirect_to users_url, :flash => {error: "Member imported failed.<br />#{e.message}')}"}}
+      end
     end
   end
 
@@ -97,14 +101,8 @@ class UsersController < ApplicationController
   end
 
   def import_google
-    session = create_google_session
-    return @aclx_files = session.collection_by_title("ACLX")
-
-    if !session.is_a? GoogleDrive::Session then
-      return flash[:error] = "Unexpected session data: #{session}"
-    else
-      
-    end
+    session = create_google_session    
+    @aclx_files = session.collection_by_title("ACLX")
   end
 
   # returns a list of leadership users
@@ -114,8 +112,7 @@ class UsersController < ApplicationController
   end
 
   def print
-    @user = User.find(params[:id])
-    
+    @user = User.find(params[:id])    
     render action: "print", layout: "print_id"    
   end
 
