@@ -79,8 +79,8 @@ class UsersController < ApplicationController
   def import
     begin
       if params[:file].is_a? String then
-        session = create_google_session
-        file = session.file_by_url(params[:file])
+        google = create_google_session
+        file = google.file_by_url(params[:file])
         User.import_from_google(file)
       else
         User.import_from_upload(params[:file])
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
   def import_google
     session = create_google_session
     return if session.nil?
-    
+
     @aclx_files = session.collection_by_title("ACLX")
   end
 
@@ -140,23 +140,22 @@ class UsersController < ApplicationController
           "https://www.googleapis.com/auth/drive",
           "https://spreadsheets.google.com/feeds/",
         ],
-        redirect_uri: ENV["google_redirect_uri"] || "http://localhost:3000/users/import_google"
-      )
+        redirect_uri: ENV["google_redirect_uri"] || "http://localhost:3000/users/import_google")
       
-      if session[:google_auth_token] && !session[:google_auth_token].nil? then
+      if session[:google_auth_token].present? then
         credentials.refresh_token = session[:google_auth_token]      
       else
-        if params[:code].nil? then
+        if params[:code].present? then
+          credentials.code = params[:code]
+        else
           auth_url = credentials.authorization_uri
           redirect_to auth_url.to_s and return
-        else
-          credentials.code = params[:code]          
         end
       end
 
       credentials.fetch_access_token!
       session[:google_auth_token] = credentials.refresh_token
 
-      session = GoogleDrive::Session.from_credentials(credentials)
+      google = GoogleDrive::Session.from_credentials(credentials)
     end
 end
