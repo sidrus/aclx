@@ -105,6 +105,11 @@ class UsersController < ApplicationController
     return if session.nil?
 
     @aclx_files = session.collection_by_title("ACLX")
+    if @aclx_files.present? then
+      return @aclx_files      
+    else
+      return redirect_to users_url, :flash => { error: "No files returned.  Make sure you have an 'ACLX' folder and that there are files in the folder." }      
+    end    
   end
 
   # returns a list of leadership users
