@@ -132,8 +132,13 @@ class UsersController < ApplicationController
     def create_google_session
       require "googleauth"
 
-      if session[:google_credentials].present? then
+      if session[:google_credentials].present? then        
         credentials = session[:google_credentials]
+        
+        if credential_is_expired?(credentials) then
+          session[:google_credentials] = nil
+          return create_google_session
+        end
       else
         # create a new OAuth credential
         credentials = Google::Auth::UserRefreshCredentials.new(
@@ -159,5 +164,12 @@ class UsersController < ApplicationController
       end
 
       google = GoogleDrive::Session.from_credentials(credentials)
+    end
+
+    def credential_is_expired?(credential)
+      require 'date'
+
+      expires_at = credential.issued_at + credential.expires_in.seconds
+      DateTime.now >= expires_at
     end
 end
