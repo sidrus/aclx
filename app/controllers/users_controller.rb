@@ -98,11 +98,12 @@ class UsersController < ApplicationController
 
   def import_google
     session = create_google_session
+    return @aclx_files = session.collection_by_title("ACLX")
 
     if !session.is_a? GoogleDrive::Session then
       return flash[:error] = "Unexpected session data: #{session}"
     else
-      return @aclx_files = session.collection_by_title("ACLX")
+      
     end
   end
 
@@ -148,7 +149,7 @@ class UsersController < ApplicationController
       else
         if params[:code].nil? then
           auth_url = credentials.authorization_uri
-          return redirect_to auth_url.to_s
+          redirect_to auth_url.to_s and return
         else
           credentials.code = params[:code]          
         end
