@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :users do
+    resources :vehicles
+    
     collection do 
       post :import
       get :import_show
