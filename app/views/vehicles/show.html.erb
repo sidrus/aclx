@@ -1,0 +1,36 @@
+<p>
+  <strong>Nickname:</strong>
+  <%= @vehicle.nickname %>
+</p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @vehicle.user.full_name %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @vehicle.vehicle_color.name %>
+</p>
+
+<p>
+  <strong>Edition:</strong>
+  <%= @vehicle.vehicle_edition.name %>
+</p>
+
+<p>
+  <strong>Trim:</strong>
+  <%= @vehicle.vehicle_trim.name %>
+</p>
+
+<p>
+  <strong>Model:</strong>
+  <%= @vehicle.vehicle_model.name %>
+</p>
+
+<div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= link_to 'Edit', edit_user_vehicle_path(@user, @vehicle), class: "btn btn-default" %>
+    <%= link_to "Back", user_vehicles_path(@user), class: "btn btn-default" %>
+  </div>
+</div>

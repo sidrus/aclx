@@ -10,14 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017005222) do
+ActiveRecord::Schema.define(version: 20161021011521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "car_types", force: :cascade do |t|
-    t.string "name"
-  end
 
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
@@ -46,4 +42,55 @@ ActiveRecord::Schema.define(version: 20161017005222) do
     t.boolean  "inactive"
   end
 
+  create_table "vehicle_colors", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_vehicle_colors_on_vehicle_id", using: :btree
+  end
+
+  create_table "vehicle_editions", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_vehicle_editions_on_vehicle_id", using: :btree
+  end
+
+  create_table "vehicle_models", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_vehicle_models_on_vehicle_id", using: :btree
+  end
+
+  create_table "vehicle_trims", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "vehicle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["vehicle_id"], name: "index_vehicle_trims_on_vehicle_id", using: :btree
+  end
+
+  create_table "vehicles", force: :cascade do |t|
+    t.string   "nickname"
+    t.integer  "user_id"
+    t.integer  "color_id"
+    t.integer  "edition_id"
+    t.integer  "trim_id"
+    t.integer  "model_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.boolean  "is_primary"
+    t.integer  "vehicle_year"
+    t.index ["user_id"], name: "index_vehicles_on_user_id", using: :btree
+  end
+
+  add_foreign_key "vehicle_editions", "vehicles"
+  add_foreign_key "vehicle_models", "vehicles"
+  add_foreign_key "vehicle_trims", "vehicles"
+  add_foreign_key "vehicle_colors", "vehicles"
+  add_foreign_key "vehicles", "users"
 end

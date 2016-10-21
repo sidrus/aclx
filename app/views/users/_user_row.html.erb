@@ -20,12 +20,12 @@
     </div>
 
     <div class="panel-body">
-        <%= user.vehicle_desc || "No vehicle information." %><br />
-        <% split_email(user).each do |email| %>
-          <%= mail_to(email) %><br />
-        <% end %>
-        <hr />
-        <%= user.comments || "No notes entered." %>
+      <%= user.primary_vehicle && link_to(user.primary_vehicle.description, user_vehicles_path(user)) || link_to("Add vehicle...", new_user_vehicle_path(user), class: "btn btn-default") %><hr />
+      <% split_email(user).each do |email| %>
+        <%= mail_to(email) %><br />
+      <% end %>
+      <hr />
+      <%= user.comments || "No notes entered." %>
     </div>
 
     <div class="panel-footer">

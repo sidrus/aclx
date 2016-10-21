@@ -14,7 +14,7 @@
     <div class="name quickfit"><span class="vertical-center"><%= (@user.full_name && @user.full_name.upcase) || "Unknown Person" %></span></div>
     <div class="logo"></div>
     <div class="username"><%= (@user.forum_name && @user.forum_name.upcase) || "No Forum Name" %></div>
-    <div class="vehicle"><%= (@user.vehicle_desc && @user.vehicle_desc.upcase) || "No Vehicle Description" %></div>
+    <div class="vehicle quickfit"><%= (@user.primary_vehicle && @user.primary_vehicle.id_description.upcase) || "No Vehicle Description" %></div>
     <div class="footer">
       <div class="join-date"><b>MEMBER SINCE:</b> <%= @user.date_joined.to_s(:long) %></div>
       <div class="qr-code"><img src="data:image/png;base64,<%= @user.get_qr_string %>" /></div>
