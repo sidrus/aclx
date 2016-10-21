@@ -1,0 +1,43 @@
+<h1>Vehicles for <%= link_to @user.full_name.titleize, @user %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nickname</th>
+      <th>Description</th>
+      <th colspan="2">Options</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @vehicles.each do |vehicle| %>
+      <tr>
+        <td>
+          <% if vehicle.is_primary %>
+            <span class="glyphicon glyphicon-star text-info"></span>
+          <% end %>
+          <%= vehicle.nickname %>          
+        </td>
+        <td>
+          <%= vehicle.vehicle_year %>
+          <%= vehicle.vehicle_model && vehicle.vehicle_model.name || "" %>
+          <%= vehicle.vehicle_trim && vehicle.vehicle_trim.name || "" %>
+          <%= vehicle.vehicle_edition && vehicle.vehicle_edition.name || "" %>
+
+          <% if vehicle.vehicle_color %>
+            (<%= vehicle.vehicle_color.name %>)
+          <% end %>
+        </td>
+        <td><%= link_to 'Edit', edit_user_vehicle_path(params[:user_id], vehicle) %></td>
+        <td><%= link_to 'Destroy', user_vehicle_path(params[:user_id], vehicle), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div class="container">
+  <%= link_to 'New Vehicle', new_user_vehicle_path(params[:user_id]), class: "btn btn-primary" %>
+  <%= link_to "Back", :back, class: "btn btn-default" %>
+</div>

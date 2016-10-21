@@ -1,0 +1,33 @@
+<%= bootstrap_form_for [user, vehicle], layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10" do |f| %>
+  <% if vehicle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(vehicle.errors.count, "error") %> prohibited this vehicle from being saved:</h2>
+
+      <ul>
+      <% vehicle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.text_field :nickname %>
+  <%= f.select :vehicle_year, 2006..Time.zone.now.year, label: "Model Year" %>
+  <%= f.collection_select :color_id, VehicleColor.all.order(:name), :id, :name, {prompt: "Select a color"} %>
+  <%= f.collection_select :model_id, VehicleModel.all, :id, :name, {prompt: "Select a model"} %>
+  <%= f.collection_select :trim_id, VehicleTrim.all, :id, :name, {prompt: "Select a trim"} %>  
+  <%= f.collection_select :edition_id, VehicleEdition.all, :id, :name, {prompt: "Select an edition"} %>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.check_box :is_primary %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.primary "Save" %>
+      <%= link_to "Back", :back, class: "btn btn-default" %>
+    </div>
+  </div>
+<% end %>

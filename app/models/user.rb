@@ -1,6 +1,8 @@
 require 'base64'
 
 class User < ApplicationRecord
+	has_many :vehicles
+
 	def self.import_from_upload(file)
 		spreadsheet = open_spreadsheet(file)
 	  import(spreadsheet)
@@ -33,6 +35,10 @@ class User < ApplicationRecord
 	  when ".xlsx" then Roo::Excelx.new(file.path)
 	  else raise "Unknown file type: #{file.original_filename}"
 	  end
+	end
+
+	def primary_vehicle
+		self.vehicles.where(is_primary: true).first
 	end
 
 	def get_qr_string()	
