@@ -1,12 +1,25 @@
-<h1>Member List <small>(<%= pluralize(@users.all.count, "member").titleize %>)</small></h1>
 
-
-<div class="text-center">
-  <%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
+<%= form_tag users_path, method: :get, class: "" do %>
+<div class="input-group">
+  <%= text_field_tag 'search', nil, placeholder: "Find a member...", class: "form-control" %>
+  <span class="input-group-btn">
+    <%= button_tag("", class: "btn btn-warning", type: :submit) do %>
+      <span class="glyphicon glyphicon-search"></span>
+    <% end %>
+  </span>
 </div>
+<% end %>
 
-<%= render partial: "user_row", locals: {users: @users} %>
+<% if @users %>
+  <div class="row top-buffer">
+    <div class="text-center">
+      <%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
+    </div>
 
-<div class="text-center">
-  <%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
-</div>
+    <%= render partial: "user_row", locals: {users: @users} %>
+
+    <div class="text-center">
+      <%= will_paginate(@users, renderer: BootstrapPagination::Rails) %>
+    </div>
+  </div>
+<% end %>

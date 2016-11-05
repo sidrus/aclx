@@ -6,11 +6,8 @@ class UsersController < ApplicationController
   def index
     if params[:search] then
       @users = User.where("(lower(full_name) LIKE :search) OR (lower(forum_name) LIKE :search)", search: "%#{params[:search]}%".downcase)
-    else
-      @users = User.all.where(inactive: false)
+      @users = @users.order(:aclx_id).paginate(:page => params[:page], :per_page => 5)
     end
-
-    @users = @users.order(:aclx_id).paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /users/1
