@@ -10,4 +10,9 @@ class Role < ApplicationRecord
             :allow_nil => true
 
   scopify
+
+  def display_name
+    name.titleize
+  end
+
 end

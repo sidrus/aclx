@@ -2,7 +2,7 @@
   <div class="form-group">
     <%= f.email_field :email %>
     <%= f.text_field :username %>
-    <%= f.collection_check_boxes :role_ids, Role.all.sort, :id, :name, label: "Roles" %>
+    <%= f.collection_check_boxes :role_ids, Role.all.sort, :id, :display_name, label: "Roles" %>
   </div>
 
   <div class="form-group">

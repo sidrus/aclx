@@ -3,16 +3,15 @@
   <%= f.text_field :forum_name %>
   <%= f.text_field :full_name %>
   <%= f.email_field :email %>
-  <%= f.text_field :vehicle_desc %>
   <%= f.date_select :date_joined %>  
   <%= f.text_area :comments %>
   <%= f.date_select :last_activity %>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.check_box :id_issued %>
-      <%= f.check_box :has_facebook %>
-      <%= f.check_box :is_leadership %>
+      <%= f.check_box :id_issued, label: "ID Issued" %>
+      <%= f.check_box :has_facebook, label: "Has Facebook" %>
+      <%= f.check_box :is_leadership, label: "Leadership Team" %>
       <%= f.check_box :inactive %>
     </div>
   </div>

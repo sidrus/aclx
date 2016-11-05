@@ -131,7 +131,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:id, :id_issued, :forum_name, :full_name, :email, :vehicle_desc, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership, :aclx_id, :inactive)
+      params.require(:user).permit(:id, :id_issued, :forum_name, :full_name, :email, :date_joined, :has_facebook, :comments, :last_activity, :is_leadership, :aclx_id, :inactive)
     end
 
     def create_google_session

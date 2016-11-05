@@ -2,7 +2,7 @@
   <table class="table">
     <tr>
       <td><%= "Role".pluralize(admin.roles.count) %></td>
-      <td><%= admin.roles.map { |r| r.name.titleize }.join(', ') %>
+      <td><%= admin.roles.map { |r| r.display_name }.join(', ') %>
       </td>
     </tr>
     <tr>
