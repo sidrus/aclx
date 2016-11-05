@@ -28,8 +28,14 @@
             (<%= vehicle.vehicle_color.name %>)
           <% end %>
         </td>
-        <td><%= link_to 'Edit', edit_user_vehicle_path(params[:user_id], vehicle) %></td>
-        <td><%= link_to 'Destroy', user_vehicle_path(params[:user_id], vehicle), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to_if current_admin.has_role?(:user_manager), 'Edit', edit_user_vehicle_path(params[:user_id], vehicle) do %>
+          <% end %>          
+        </td>
+        <td>
+          <%= link_to_if current_admin.has_role?(:user_manager), 'Destroy', user_vehicle_path(params[:user_id], vehicle), method: :delete, data: { confirm: 'Are you sure?' } do %>
+          <% end %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -38,6 +44,8 @@
 <br>
 
 <div class="container">
-  <%= link_to 'New Vehicle', new_user_vehicle_path(params[:user_id]), class: "btn btn-primary" %>
+  <%= link_to_if current_admin.has_role?(:user_manager), 'New Vehicle', new_user_vehicle_path(params[:user_id]), class: "btn btn-primary" do %>
+  <% end %>
+  
   <%= link_to "Back", :back, class: "btn btn-default" %>
 </div>

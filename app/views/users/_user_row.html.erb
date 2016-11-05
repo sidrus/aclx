@@ -8,7 +8,8 @@
       <div class="row">
         <h3 class="panel-title">
           <div class="text-left col-xs-6">
-            <%= link_to user.full_name, edit_user_path(user) %><br />
+            <%= link_to_if current_admin.has_role?(:user_manager), user.full_name.titleize, edit_user_path(user) %>
+            <br />
             <small><span class="text-muted">(Member #: <%= user.aclx_id %>)</span></small>
           </div>          
         </h3>
@@ -20,10 +21,18 @@
     </div>
 
     <div class="panel-body">
-      <%= user.primary_vehicle && link_to(user.primary_vehicle.description, user_vehicles_path(user)) || link_to("Add vehicle...", new_user_vehicle_path(user), class: "btn btn-default") %><hr />
+      <span class="text-muted">Vehicles</span><br />
+      <%= link_to_unless(user.primary_vehicle.blank?, user.primary_vehicle && user.primary_vehicle.description, user_vehicles_path(user)) do %>
+        <%= link_to_if(current_admin.has_role?(:user_manager), "Add vehicle...", new_user_vehicle_path(user), class: "btn btn-default") do %>
+          <em>No vehicles listed.</em>
+        <% end %>
+      <% end %>
+      
+      <hr />
       <% split_email(user).each do |email| %>
         <%= mail_to(email) %><br />
-      <% end %>
+      <% end %>      
+
       <hr />
       <%= user.comments || "No notes entered." %>
     </div>
@@ -37,7 +46,7 @@
 
           <!-- ID ISSUED -->
           <span class="label label-<%= status %> buffer-badges">
-            <%= link_to user.id_issued ? "ID Issued" : "Missing ID", print_path(user), :target => "_blank" %>            
+            <%= link_to_if(current_admin.has_role?(:user_manager), user.id_issued ? "ID Issued" : "Missing ID", print_path(user), {:target => "_blank"}) %>            
           </span>
 
           <!-- HAS FACEBOOK -->
