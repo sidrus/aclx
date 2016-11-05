@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+VehicleColor.destroy_all
 vehicle_colors = VehicleColor.create([
     {name: "Bright White Clearcoat"},
     {name: "Ivory Tri-Coat Pearl"},
@@ -63,6 +64,7 @@ vehicle_colors = VehicleColor.create([
     {name: "Cashmere Pearlcoat"}
   ])
 
+VehicleModel.destroy_all
 vehicle_models = VehicleModel.create([
     {name: "Charger"},
     {name: "Challenger"},
@@ -70,6 +72,7 @@ vehicle_models = VehicleModel.create([
     {name: "Magnum"}
   ])
 
+VehicleEdition.destroy_all
 vehicle_editions = VehicleEdition.create([
     {name: "100th Anniversary"},
     {name: "Blacktop"},
@@ -92,6 +95,7 @@ vehicle_editions = VehicleEdition.create([
     {name: "Yellow Jacket"}
   ])
 
+VehicleTrim.destroy_all
 vehicle_trims = VehicleTrim.create([
     {name: "SE"},
     {name: "SXT"},
@@ -103,10 +107,22 @@ vehicle_trims = VehicleTrim.create([
     {name: "C"}
   ])
 
-default_admin = Admin.create(
-    username: "Default Admin",
-    email: "none@example.com",
-    password: "changeme",
-    password_confirmation: "changeme",
-    confirmed_at: DateTime.now)
-default_admin.add_role :admin
+Role.destroy_all
+[:developer, :administrator, :event_coordinator, :user_manager].each do |role|
+  Role.create(name: role)
+end
+
+# configure the default admin account
+default_admin = nil
+if Admin.all.count == 0 then
+    default_admin = Admin.create(
+        username: "Default Admin",
+        email: "none@example.com",
+        password: "changeme",
+        password_confirmation: "changeme",
+        approved: true,
+        confirmed_at: DateTime.now)
+else
+    default_admin = Admin.find_by_email("none@example.com")
+end
+default_admin.add_role :administrator

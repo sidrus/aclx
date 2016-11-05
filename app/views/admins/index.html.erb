@@ -1,0 +1,17 @@
+<h1>Administrators</h1>
+
+<table class="table">
+<% @admins.each do |admin| %>
+  <tr>
+    <td class="align-middle">
+      <%= admin.display_name.titleize %>
+      <% unless admin.approved? %>
+        <span class="glyphicon glyphicon-exclamation-sign text-info"></span>
+      <% end %>
+    </td>
+    <td class="text-right">
+      <%= link_to "Edit", edit_admin_path(admin), class: "btn btn-small btn-default" %>
+    </td>
+  </tr>
+<% end %>
+</table>
