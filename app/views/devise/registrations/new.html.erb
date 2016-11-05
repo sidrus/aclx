@@ -4,14 +4,15 @@
   <%= devise_error_messages! %>
 
   <div class="">
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email, autofocus: true, icon: "user" %>
 
-    <%= f.password_field :password, autocomplete: "off" %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <%= f.password_field :password, autocomplete: "off", icon: "lock", help: "Must be at least #{@minimum_password_length} characters long." %>
+    <% else %>
+      <%= f.password_field :password, autocomplete: "off", icon: "lock" %>
     <% end %>
 
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
+    <%= f.password_field :password_confirmation, autocomplete: "off", icon: "lock" %>
     <%= f.primary "Sign up" %>
   </div>
 <% end %>

@@ -1,0 +1,21 @@
+<%= bootstrap_form_for(admin, layout: :horizontal, label_errors: true, label_col: "col-sm-2", control_col: "col-sm-10") do |f| %>
+  <div class="form-group">
+    <%= f.email_field :email %>
+    <%= f.text_field :username %>
+    <%= f.collection_check_boxes :role_ids, Role.all.sort, :id, :name, label: "Roles" %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.check_box :approved %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <%= f.primary "Update" %>
+      <%= link_to "Back", :back, class: "btn btn-default" %>
+      <%= link_to "Delete", admin, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+    </div>
+  </div>  
+<% end %>

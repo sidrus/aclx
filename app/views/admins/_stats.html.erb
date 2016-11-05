@@ -1,0 +1,45 @@
+<div class="container">
+  <table class="table">
+    <tr>
+      <td><%= "Role".pluralize(admin.roles.count) %></td>
+      <td><%= admin.roles.map { |r| r.name.titleize }.join(', ') %>
+      </td>
+    </tr>
+    <tr>
+      <td>Sign-in count</td>
+      <td><%= admin.sign_in_count %></td>
+    </tr>
+
+    <% unless admin.last_sign_in_at.blank? %>
+    <tr>
+      <td>Last sign-in</td>
+      <td><%= admin.last_sign_in_at.localtime.to_s(:long) %></td>
+    </tr>
+    <% end %>
+
+    <tr>
+      <td>Last IP</td>
+      <td><%= admin.last_sign_in_ip %></td>
+    </tr>
+
+    <tr>
+      <td>Failed Login Attempts</td>
+      <td>
+        <%= admin.failed_attempts %>
+        <% if admin.locked_at? %>
+          (Locked at: <%= admin.locked_at.localtime.to_s(:short) %>)
+        <% end %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>Created</td>
+      <td><%= admin.created_at.localtime.to_s(:long) %></td>
+    </tr>
+
+    <tr>
+      <td>Last Updated</td>
+      <td><%= admin.updated_at.localtime.to_s(:long) %></td>
+    </tr>
+  </table>
+</div>

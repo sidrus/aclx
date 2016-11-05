@@ -32,6 +32,14 @@
               <% end %>
             </li>
 
+            <!-- ADMIN LIST -->
+            <li>
+              <%= link_to admins_path do %>
+                <span class="glyphicon glyphicon-user text-danger"></span>
+                &nbsp;View Administrators
+              <% end %>
+            </li>
+
             <!-- IMPORT FUNCTIONS  -->
             <li role="presentation" class="divider"></li>
             <li>
@@ -48,7 +56,7 @@
             </li>
 
             <!-- DELETE ALL!!!  -->
-            <% if current_admin && current_admin.has_role?("DEVELOPER") then %>
+            <% if current_admin.has_role?(:developer) then %>
             <li role="presentation" class="divider"></li>
             <li>              
               <%= link_to(destroy_all_users_path, method: :delete, :data => {confirm: "This is a destructive operation.  Are you sure?"}, class: "text-center") do %>
