@@ -1,11 +1,11 @@
 <%= bootstrap_form_for(user, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-10") do |f| %>
-  <%= f.number_field :aclx_id %>  
-  <%= f.text_field :forum_name %>
-  <%= f.text_field :full_name %>
+  <%= f.number_field :aclx_id, label: "ACLX Id", value: user.aclx_id || User.next_aclx_id, readonly: true %>  
+  <%= f.text_field :forum_name, label: "Forum Name" %>
+  <%= f.text_field :full_name, label: "Full Name" %>
   <%= f.email_field :email %>
-  <%= f.date_select :date_joined %>  
+  <%= f.date_select :date_joined, label: "Date Joined" %>
   <%= f.text_area :comments %>
-  <%= f.date_select :last_activity %>
+  <%= f.date_select :last_activity, label: "Last Activity" %>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">

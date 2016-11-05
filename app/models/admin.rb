@@ -25,4 +25,12 @@ class Admin < ApplicationRecord
     # fallback on email, if no username
     return email
   end
+
+  def roles_to_string
+    if roles.count > 0 then
+      return roles.map { |r| r.display_name }.join(', ')
+    else
+      return "No roles defined"
+    end
+  end
 end
