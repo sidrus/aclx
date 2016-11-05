@@ -5,6 +5,7 @@
   <tr>
     <td class="align-middle">
       <%= admin.display_name.titleize %>
+      (<%= admin.roles_to_string %>)
       <% unless admin.approved? %>
         <span class="glyphicon glyphicon-exclamation-sign text-info"></span>
       <% end %>

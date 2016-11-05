@@ -13,9 +13,9 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <%= f.primary "Update" %>
+      <%= f.primary "Update" if current_admin.has_role? :administrator %>
       <%= link_to "Back", :back, class: "btn btn-default" %>
-      <%= link_to "Delete", admin, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>
+      <%= link_to "Delete", admin, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" if current_admin.has_role? :administrator %>
     </div>
   </div>  
 <% end %>

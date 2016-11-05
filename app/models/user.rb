@@ -28,6 +28,10 @@ class User < ApplicationRecord
 	  end
 	end
 
+	def self.next_aclx_id
+		User.maximum(:aclx_id) + 1
+	end
+
 	def self.open_spreadsheet(file)
 	  case File.extname(file.original_filename)
 	  when ".csv" then Roo::Csv.new(file.path)
