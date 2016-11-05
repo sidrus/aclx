@@ -123,6 +123,8 @@ if Admin.all.count == 0 then
         approved: true,
         confirmed_at: DateTime.now)
 else
-    default_admin = Admin.find_by_email("none@example.com")
+    default_admin = Admin.find_by_email("none@example.com") || Admin.first
 end
 default_admin.add_role :administrator
+default_admin.approved = true
+default_admin.save
