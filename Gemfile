@@ -56,4 +56,8 @@ gem 'bootstrap_form'
 gem 'google_drive'
 gem 'activerecord-session_store'
 
+gem 'devise'
+gem 'cancancan'
+gem 'rolify'
+
 ruby "2.3.1"

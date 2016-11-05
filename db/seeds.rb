@@ -102,3 +102,11 @@ vehicle_trims = VehicleTrim.create([
     {name: "S"},
     {name: "C"}
   ])
+
+default_admin = Admin.create(
+    username: "Default Admin",
+    email: "none@example.com",
+    password: "changeme",
+    password_confirmation: "changeme",
+    confirmed_at: DateTime.now)
+default_admin.add_role :admin
