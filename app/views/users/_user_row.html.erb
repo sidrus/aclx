@@ -8,7 +8,7 @@
       <div class="row">
         <h3 class="panel-title">
           <div class="text-left col-xs-6">
-            <%= link_to_if current_admin.has_role?(:user_manager), user.full_name.titleize, edit_user_path(user) %>
+            <%= link_to_if current_admin.has_role?(:user_manager), user.display_name, edit_user_path(user) %>
             <br />
             <small><span class="text-muted">(Member #: <%= user.aclx_id %>)</span></small>
           </div>          
