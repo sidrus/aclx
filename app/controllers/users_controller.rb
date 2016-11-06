@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :check_role, except: [:index, :show, :leadership]
 
   # GET /users
   # GET /users.json
@@ -124,6 +125,12 @@ class UsersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
+    end
+
+    def check_role
+      unless current_admin.has_role?(:user_manager)
+        redirect_to users_url, :flash => {error: "You must be a user manager to perform that action."}
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

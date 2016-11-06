@@ -1,2 +1,2 @@
-json.extract! vehicle, :id, :nickname, :member_id, :color_id, :edition_id, :trim_id, :model_id, :created_at, :updated_at
-json.url vehicle_url(vehicle, format: :json)
+json.extract! vehicle, :id, :nickname, :user_id, :color_id, :edition_id, :trim_id, :model_id, :is_primary, :vehicle_year, :created_at, :updated_at
+json.url user_vehicle_url(@user, vehicle, format: :json)

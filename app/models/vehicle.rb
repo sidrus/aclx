@@ -8,17 +8,33 @@ class Vehicle < ApplicationRecord
   def description
     desc = ""
     desc += "'#{self.nickname}' - " unless nickname.blank?
-    desc += "#{vehicle_year} #{vehicle_model.name} #{vehicle_trim.name}"    
-    desc += " #{vehicle_edition.name}" unless vehicle_edition.blank?
-    desc += " (#{vehicle_color.name})"
+    desc += "#{vehicle_year} #{model} #{trim}"
+    desc += " #{edition}" unless edition.blank?
+    desc += " (#{color})"
 
     desc
   end
 
+  def color
+    vehicle_color && vehicle_color.name || ""
+  end
+
+  def model
+    vehicle_model && vehicle_model.name || ""
+  end
+
+  def trim
+    vehicle_trim && vehicle_trim.name || ""
+  end
+
+  def edition
+    vehicle_edition && vehicle_edition.name || ""
+  end
+
   def id_description
     desc = ""
-    desc += "#{vehicle_year} #{vehicle_color.name} #{vehicle_model.name} #{vehicle_trim.name}"
-    desc += " #{vehicle_edition.name}" unless vehicle_edition.blank?
+    desc += "#{vehicle_year} #{color} #{model} #{trim}"
+    desc += " #{edition}" unless edition.blank?
     desc
   end
 

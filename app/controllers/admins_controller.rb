@@ -1,5 +1,6 @@
 class AdminsController < ApplicationController
   before_action :set_admin, only: [:edit, :update, :destroy]
+  before_action :check_role, except: [:index, :show]
 
   def index
     @admins = Admin.all.sort_by { |a| a.display_name }
@@ -11,10 +12,6 @@ class AdminsController < ApplicationController
   # PATCH/PUT /admins/1
   # PATCH/PUT /admins/1.json
   def update
-    unless current_admin.has_role? :administrator
-      return redirect_to admins_url, flash: {error: "You need the administrator role to perform that action."}
-    end
-
     respond_to do |format|
       if @admin.update(admin_params)
         format.html { redirect_to edit_admin_path(@admin), notice: 'User was successfully updated.' }
@@ -29,10 +26,6 @@ class AdminsController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    unless current_admin.has_role? :administrator
-      return redirect_to admins_url, flash: {error: "You need the administrator role to perform that action."}
-    end
-
     respond_to do |format|
       if @admin.destroy
         format.html { redirect_to admins_url, notice: 'User was successfully destroyed.' }
@@ -48,6 +41,12 @@ private
   # Use callbacks to share common setup or constraints between actions.
   def set_admin
     @admin = Admin.find(params[:id])
+  end
+
+  def check_role
+    unless current_admin.has_role?(:administrator)
+      redirect_to users_url, :flash => {error: "You need the administrator role to perform that action."}
+    end
   end
 
   def admin_params

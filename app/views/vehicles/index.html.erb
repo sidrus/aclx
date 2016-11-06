@@ -20,12 +20,12 @@
         </td>
         <td>
           <%= vehicle.vehicle_year %>
-          <%= vehicle.vehicle_model && vehicle.vehicle_model.name || "" %>
-          <%= vehicle.vehicle_trim && vehicle.vehicle_trim.name || "" %>
-          <%= vehicle.vehicle_edition && vehicle.vehicle_edition.name || "" %>
+          <%= vehicle.model %>
+          <%= vehicle.trim %>
+          <%= vehicle.edition %>
 
-          <% if vehicle.vehicle_color %>
-            (<%= vehicle.vehicle_color.name %>)
+          <% unless vehicle.color.blank? %>
+            (<%= vehicle.color %>)
           <% end %>
         </td>
         <td>
