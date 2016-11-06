@@ -1,2 +1,26 @@
-<%= render 'form', admin: @admin %>
-<%= render 'stats', admin: @admin %>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Edit <%= @admin.display_name %>
+  </div>
+
+  <div class="panel-body">
+    <%= render 'form', admin: @admin %>
+    
+  </div>
+
+  <div class="panel-footer">
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Stats
+  </div>
+
+  <div class="panel-body">
+    <%= render 'stats', admin: @admin %>
+  </div>
+
+  <div class="panel-footer">
+  </div>
+</div>

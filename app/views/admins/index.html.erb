@@ -1,18 +1,27 @@
-<h1>Administrators</h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h4>Administrators</h4>
+  </div>
 
-<table class="table">
-<% @admins.each do |admin| %>
-  <tr>
-    <td class="align-middle">
-      <%= admin.display_name.titleize %>
-      (<%= admin.roles_to_string %>)
-      <% unless admin.approved? %>
-        <span class="glyphicon glyphicon-exclamation-sign text-info"></span>
+  <div class="panel-body">
+    <table class="table">
+      <% @admins.each do |admin| %>
+        <tr>
+          <td class="align-middle">
+            <%= admin.display_name.titleize %>
+            (<%= admin.roles_to_string %>)
+            <% unless admin.approved? %>
+              <span class="glyphicon glyphicon-exclamation-sign text-info"></span>
+            <% end %>
+          </td>
+          <td class="text-right">
+            <%= link_to "Edit", edit_admin_path(admin), class: "btn btn-small btn-default" %>
+          </td>
+        </tr>
       <% end %>
-    </td>
-    <td class="text-right">
-      <%= link_to "Edit", edit_admin_path(admin), class: "btn btn-small btn-default" %>
-    </td>
-  </tr>
-<% end %>
-</table>
+      </table>
+  </div>
+
+  <div class="panel-footer">
+  </div>
+</div>

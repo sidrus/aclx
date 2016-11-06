@@ -1,21 +1,23 @@
-<%= bootstrap_form_for(admin, layout: :horizontal, label_errors: true, label_col: "col-sm-2", control_col: "col-sm-10") do |f| %>
-  <div class="form-group">
-    <%= f.email_field :email %>
-    <%= f.text_field :username %>
-    <%= f.collection_check_boxes :role_ids, Role.all.sort, :id, :display_name, label: "Roles" %>
-  </div>
-
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.check_box :approved %>
+<div class="container col-xs-12">
+  <%= bootstrap_form_for(admin, layout: :horizontal, label_errors: true, label_col: "col-sm-2", control_col: "col-sm-10") do |f| %>
+    <div class="form-group row">
+      <%= f.email_field :email %>
+      <%= f.text_field :username %>
+      <%= f.collection_check_boxes :role_ids, Role.all.sort, :id, :display_name, label: "Roles" %>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <%= f.primary "Update" if current_admin.has_role? :administrator %>
-      <%= link_to "Back", :back, class: "btn btn-default" %>
-      <%= link_to "Delete", admin, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" if current_admin.has_role? :administrator %>
+    <div class="form-group row">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.check_box :approved %>
+      </div>
     </div>
-  </div>  
-<% end %>
+
+    <div class="form-group row">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= f.primary "Update" if current_admin.has_role? :administrator %>
+        <%= link_to "Back", :back, class: "btn btn-default" %>
+        <%= link_to "Delete", admin, method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" if current_admin.has_role? :administrator %>
+      </div>
+    </div>  
+  <% end %>
+</div>
