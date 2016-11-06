@@ -45,6 +45,10 @@ class User < ApplicationRecord
 		self.vehicles.where(is_primary: true).first
 	end
 
+	def display_name
+		full_name.titleize
+	end
+
 	def get_qr_string()	
 		qr = RQRCode::QRCode.new("#{self.id}", :size => 4, :level => :h)
     return Base64.encode64(qr.to_img.to_string)
