@@ -1,6 +1,7 @@
 class VehiclesController < ApplicationController
   before_action :set_vehicle, only: [:show, :edit, :update, :destroy]
   before_action :set_user
+  before_action :check_role, except: [:index, :show]
 
   # GET /vehicles
   # GET /vehicles.json
@@ -81,6 +82,12 @@ class VehiclesController < ApplicationController
         @user = User.find(params[:user_id])
       rescue Exception => e
         redirect_to user_vehicles_url(params[:user_id]), :flash => {errors: "Could not locate user with ID=#{params[:user_id]}"}
+      end
+    end
+
+    def check_role
+      unless current_admin.has_role?(:user_manager)
+        redirect_to user_vehicles_url(@user), :flash => {error: "You must be a user manager to perform that action."}
       end
     end
 
