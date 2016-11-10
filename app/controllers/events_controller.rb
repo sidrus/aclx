@@ -20,6 +20,11 @@ class EventsController < ApplicationController
     end
   end
 
+  def allevents
+    @events = Event.all.order(:start)
+    render :index
+  end
+
   # GET /events/1
   # GET /events/1.json
   def show
@@ -39,6 +44,9 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     @event.admin = current_admin
+
+    # default value for :published
+    params[:published] ||= false
 
     respond_to do |format|
       if @event.save
