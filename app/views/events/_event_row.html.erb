@@ -1,0 +1,21 @@
+<% events.each_with_index do |event, i| %>
+  <% if i > 0 %>
+  <hr />
+  <% end %>
+  <div class="">
+    <p>      
+      <%= link_to event.title.titleize, event %>
+      <span class="text-muted">(<%= formatted_time_distance_from_now(event.start) %>)</span>
+    </p>
+    <p>
+      <strong>Date: </strong><%= event.start.localtime.strftime("%-d %b %y (%A)") %><br >
+      <strong>Time: </strong><%= event.start.localtime.strftime("%H:%M") %>
+    </p>
+    <p>
+      <span class="glyphicon glyphicon-<%= event.published ? "ok text-success" : "remove text-danger" %>"></span>
+      <% if event.has_mappable_location? %>
+      <span class="glyphicon glyphicon-map-marker text-danger"></span>
+      <% end %>
+    </p>
+  </div>
+<% end %>

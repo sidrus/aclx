@@ -14,5 +14,7 @@ module Aclx
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
     Rails.application.config.secret_key_base = ENV["SECRET_KEY_BASE"]
+
+    Rails.application.config.time_zone = "Central Time (US & Canada)"
   end
 end

@@ -60,4 +60,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 
+gem 'geocoder'
+gem 'gmaps4rails'
+
 ruby "2.3.1"

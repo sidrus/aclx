@@ -13,7 +13,7 @@
     <% unless admin.last_sign_in_at.blank? %>
     <tr>
       <td>Last sign-in</td>
-      <td><%= admin.last_sign_in_at.localtime.to_s(:long) %></td>
+      <td><%= admin.last_sign_in_at.localtime.to_s(:rfc822) %></td>
     </tr>
     <% end %>
 
@@ -27,19 +27,19 @@
       <td>
         <%= admin.failed_attempts %>
         <% if admin.locked_at? %>
-          (Locked at: <%= admin.locked_at.localtime.to_s(:short) %>)
+          (Locked at: <%= admin.locked_at.localtime.to_s(:rfc822) %>)
         <% end %>
       </td>
     </tr>
 
     <tr>
       <td>Created</td>
-      <td><%= admin.created_at.localtime.to_s(:long) %></td>
+      <td><%= admin.created_at.localtime.to_s(:rfc822) %></td>
     </tr>
 
     <tr>
       <td>Last Updated</td>
-      <td><%= admin.updated_at.localtime.to_s(:long) %></td>
+      <td><%= admin.updated_at.localtime.to_s(:rfc822) %></td>
     </tr>
   </table>
 </div>

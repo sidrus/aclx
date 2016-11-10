@@ -6,6 +6,8 @@ class Admin < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :confirmable, :lockable
 
+  scope :event_coordinators, -> { Admin.select {|a| a.has_role?(:event_coordinator) && a.approved} }
+
   def active_for_authentication? 
     super && approved? 
   end 
