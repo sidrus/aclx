@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   end
 
   get '/leadership', :to => 'users#leadership'
+  get '/allevents', :to => 'events#allevents'
 
   root to: "users#index"
 end
