@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<!-- Event List -->
+<div class="col-xs-12 col-md-4">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="panel-title pull-left">Events</div>
+      <div class="pull-right">
+        <%= bootstrap_form_tag url: events_path, method: :get, layout: :inline do %>
+          <%= label_tag :show_unpublished, "", class: "glyphicon glyphicon-eye-close text-info" %>
+          <%= check_box_tag :show_unpublished, 'Unpublished', params[:show_unpublished] %>
+        <% end %>
+      </div>   
+      <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+      <%= render partial: "event_row", locals: {events: @events} %>
+    </div>
+    <div class="panel-footer">
+      <%= link_to_if(current_admin.has_role?(:event_coordinator), "", new_event_url, class: "btn btn-sm btn-success glyphicon glyphicon-plus") %>
+    </div>
+  </div>
+</div>
+
+<!-- Map View -->
+<div class="col-md-8 visible-md visible-lg">
+  <div id="map" style="width: 100%; height: 85vh;">
+  </div>
+</div>
+
+<script type="text/javascript">
+  $(function() {      
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+
+      if(markers.length > 0) {
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      } else if(markers.length == 1) {
+        handler.bounds.extendWith(markers);
+        handler.getMap().setZoom(10);
+      } else {
+        handler.map.centerOn({lat: 29.4241, lng: -98.4936});          
+        handler.getMap().setZoom(10);
+      }
+    });
+  });
+</script>

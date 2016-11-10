@@ -58,4 +58,8 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  
+  unless Rails.application.secrets.gmaps_api_key.blank?
+    ENV['gmaps_api_key'] = Rails.application.secrets.gmaps_api_key
+  end
 end

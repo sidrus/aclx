@@ -117,7 +117,7 @@ class UsersController < ApplicationController
   end
 
   def print
-    @user = User.find(params[:id])    
+    @user = User.find(params[:user_id])    
     render action: "print", layout: "print_id"    
   end
 

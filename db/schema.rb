@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161105144614) do
+ActiveRecord::Schema.define(version: 20161109164003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,32 @@ ActiveRecord::Schema.define(version: 20161105144614) do
     t.integer "admin_id"
     t.integer "role_id"
     t.index ["admin_id", "role_id"], name: "index_admins_roles_on_admin_id_and_role_id", using: :btree
+  end
+
+  create_table "event_notes", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.integer  "admin_id"
+    t.integer  "event_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_event_notes_on_admin_id", using: :btree
+    t.index ["event_id"], name: "index_event_notes_on_event_id", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.string   "location"
+    t.datetime "start"
+    t.datetime "end"
+    t.integer  "poc"
+    t.integer  "admin_id"
+    t.boolean  "published"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float    "latitude"
+    t.float    "longitude"
+    t.index ["admin_id"], name: "index_events_on_admin_id", using: :btree
   end
 
   create_table "roles", force: :cascade do |t|
@@ -132,6 +158,9 @@ ActiveRecord::Schema.define(version: 20161105144614) do
     t.index ["user_id"], name: "index_vehicles_on_user_id", using: :btree
   end
 
+  add_foreign_key "event_notes", "admins"
+  add_foreign_key "event_notes", "events"
+  add_foreign_key "events", "admins"
   add_foreign_key "vehicle_colors", "vehicles"
   add_foreign_key "vehicle_editions", "vehicles"
   add_foreign_key "vehicle_models", "vehicles"

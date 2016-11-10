@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  location: MyString
+  start: 2016-11-06 09:20:37
+  end: 2016-11-06 09:20:37
+  poc: 1
+  admin: one
+  published: false
+
+two:
+  title: MyString
+  location: MyString
+  start: 2016-11-06 09:20:37
+  end: 2016-11-06 09:20:37
+  poc: 1
+  admin: two
+  published: false

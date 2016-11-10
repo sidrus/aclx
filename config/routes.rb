@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   devise_for :admins
   resources :admins
+
+  resources :events do
+    resources :event_notes
+  end
+  
   resources :users do
     resources :vehicles
     
@@ -13,12 +18,13 @@ Rails.application.routes.draw do
 
       delete :destroy_all
     end
+
+    get '/print', :to => 'users#print'
   end
 
-  get '/print/:id', :to => 'users#print', :as => 'print'
   get '/leadership', :to => 'users#leadership'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  get '/.well-known/acme-challenge/:id', :to => 'pages#letsencrypt'
 
   root to: "users#index"
 end

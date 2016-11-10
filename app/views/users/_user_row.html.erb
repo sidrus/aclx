@@ -46,7 +46,7 @@
 
           <!-- ID ISSUED -->
           <span class="label label-<%= status %> buffer-badges">
-            <%= link_to_if(current_admin.has_role?(:user_manager), user.id_issued ? "ID Issued" : "Missing ID", print_path(user), {:target => "_blank"}) %>            
+            <%= link_to_if(current_admin.has_role?(:user_manager), user.id_issued ? "ID Issued" : "Missing ID", user_print_path(user), {:target => "_blank"}) %>            
           </span>
 
           <!-- HAS FACEBOOK -->

@@ -1,0 +1,1 @@
+json.partial! "event_notes/event_note", event_note: @event_note
