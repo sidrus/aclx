@@ -24,7 +24,5 @@ Rails.application.routes.draw do
 
   get '/leadership', :to => 'users#leadership'
 
-  get '/.well-known/acme-challenge/:id', :to => 'pages#letsencrypt'
-
   root to: "users#index"
 end
