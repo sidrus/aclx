@@ -11,17 +11,12 @@ class EventsController < ApplicationController
       @events = Event.upcoming_events
     end
 
-    @mappable_events = @events.select {|e| e.has_mappable_location?}
-
-    @hash = Gmaps4rails.build_markers(@mappable_events) do |event, marker|
-      marker.lat event.latitude
-      marker.lng event.longitude
-      marker.infowindow event.title.titleize
-    end
+    @hash = build_mappable_event_hash(@events)
   end
 
   def allevents
     @events = Event.all.order(:start)
+    @hash = build_mappable_event_hash(@events)
     render :index
   end
 
@@ -92,6 +87,16 @@ class EventsController < ApplicationController
     def check_role
       unless current_admin.has_role?(:event_coordinator)
         redirect_to events_url, :flash => {error: "You must be an event coordinator to perform that action."}
+      end
+    end
+
+    def build_mappable_event_hash(events)
+      @mappable_events = events.select {|e| e.has_mappable_location?}
+
+      @hash = Gmaps4rails.build_markers(@mappable_events) do |event, marker|
+        marker.lat event.latitude
+        marker.lng event.longitude
+        marker.infowindow event.title.titleize
       end
     end
 

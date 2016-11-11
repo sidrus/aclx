@@ -7,6 +7,11 @@ class Admin < ApplicationRecord
          :confirmable, :lockable
 
   scope :event_coordinators, -> { Admin.select {|a| a.has_role?(:event_coordinator) && a.approved} }
+  scope :developers, -> { Admin.select {|a| a.has_role?(:developer) && a.approved} }
+  scope :user_managers, -> { Admin.select {|a| a.has_role?(:user_manager) && a.approved} }
+  scope :administrators, -> { Admin.select {|a| a.has_role?(:administrator) && a.approved} }
+
+  after_create :send_creation_email
 
   def active_for_authentication? 
     super && approved? 
@@ -34,5 +39,9 @@ class Admin < ApplicationRecord
     else
       return "No roles defined"
     end
+  end
+
+  def send_creation_email
+    AclxMailer.new_admin_waiting_for_approval(self).deliver
   end
 end

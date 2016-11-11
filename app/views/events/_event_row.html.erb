@@ -2,9 +2,10 @@
   <% if i > 0 %>
   <hr />
   <% end %>
+  <%= link_to(event, style: "text-decoration: none;") do %>
   <div class="">
     <p>      
-      <%= link_to event.title.titleize, event %>
+      <%= event.title.titleize %>
       <span class="text-muted">(<%= formatted_time_distance_from_now(event.start) %>)</span>
     </p>
     <p>
@@ -18,4 +19,5 @@
       <% end %>
     </p>
   </div>
+  <% end %>
 <% end %>
