@@ -18,4 +18,6 @@ Rails.application.config.assets.precompile += %w( font-awesome/css/font-awesome.
 Rails.application.config.assets.precompile += %w( events.css )
 
 
-Rails.application.config.assets.precompile += %w( controls.js, underscore-min.js, notify.js )
+Rails.application.config.assets.precompile += %w( controls.js )
+Rails.application.config.assets.precompile += %w( underscore-min.js )
+Rails.application.config.assets.precompile += %w( notify.js )
