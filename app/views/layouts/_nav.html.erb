@@ -70,9 +70,18 @@
             <li>
               <%= link_to events_path do %>
                 <span class="glyphicon glyphicon-calendar"></span>
-                &nbsp;View Events
+                &nbsp;Upcoming Events
+              <% end %>            
+            </li>
+
+            <% if current_admin.has_role?(:event_coordinator) then %>
+            <li>
+              <%= link_to allevents_path do %>
+                <span class="glyphicon glyphicon-list-alt"></span>
+                &nbsp;All Events
               <% end %>
             </li>
+            <% end %>
 
             <!-- DELETE ALL!!!  -->
             <% if current_admin.has_role?(:developer) then %>

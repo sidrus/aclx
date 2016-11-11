@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<div class="col-xs-12 <%= @event.has_mappable_location? ? "col-md-4" : "" %>">
+<div class="col-xs-12 <%= @event.has_mappable_location? ? "col-md-5" : "" %>">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -61,7 +61,7 @@
 
 <% if @event.has_mappable_location? %>
 <!-- Map View -->
-<div class="col-md-8 col-xs-12">
+<div class="col-md-7 col-xs-12">
   <div id="map" style="width: 100%; height: 85vh;">
   </div>
 </div>
