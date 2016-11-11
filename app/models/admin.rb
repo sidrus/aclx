@@ -13,6 +13,8 @@ class Admin < ApplicationRecord
 
   after_create :send_creation_email
 
+  has_many :events
+
   def active_for_authentication? 
     super && approved? 
   end 

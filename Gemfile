@@ -42,7 +42,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-# Custom Gems
+# Member Data/ID Card Gems
 gem 'roo'
 gem "iconv"
 gem 'rails_lookup'
@@ -53,14 +53,21 @@ gem 'will_paginate'
 gem 'will_paginate-bootstrap'
 gem 'bootstrap_form'
 
+# Google Integration Gems
 gem 'google_drive'
 gem 'activerecord-session_store'
 
+# User Management Gems
 gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 
+# Events Gems
 gem 'geocoder'
 gem 'gmaps4rails'
+
+# API Gems
+gem 'active_model_serializers'
+gem 'active_hash_relation'
 
 ruby "2.3.1"
