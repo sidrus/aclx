@@ -1,4 +1,4 @@
-Rails.application.routes.draw do
+Rails.application.routes.draw do  
   devise_for :admins
   resources :admins
 
@@ -26,4 +26,13 @@ Rails.application.routes.draw do
   get '/allevents', :to => 'events#allevents'
 
   root to: "users#index"
+
+
+  #api
+  namespace :api do
+    namespace :v1 do
+      resources :users, only: [:index, :create, :show, :update, :destroy]
+      resources :admins, only: [:index, :create, :show, :update, :destroy]
+    end
+  end
 end

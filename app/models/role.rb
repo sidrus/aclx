@@ -14,5 +14,4 @@ class Role < ApplicationRecord
   def display_name
     name.titleize
   end
-
 end
