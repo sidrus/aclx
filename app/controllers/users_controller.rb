@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :check_role, except: [:index, :show, :leadership]
 
+  skip_before_filter :authenticate_admin!, only: [:leadership]
+
   # GET /users
   # GET /users.json
   def index
