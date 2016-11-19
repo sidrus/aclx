@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :admins
   resources :admins
 
+  get 'id_cards/select'
+  get 'id_cards/print'
+
   resources :events do
     resources :event_notes
   end

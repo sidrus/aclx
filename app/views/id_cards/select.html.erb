@@ -1,0 +1,15 @@
+<div class="container-fluid">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h1 class="panel-title">Print IDs</h1>
+  </div>
+
+  <div class="panel-body">
+    <%= bootstrap_form_tag url: id_cards_print_path, method: :get do |f| %>
+      <%= f.collection_select :print_id, User.active, :id, :display_name, {}, {:multiple => true, size: 10} %>
+      <%= f.primary "Print IDs" %>
+    <% end %>
+  </div>
+</div>
+
+</div>

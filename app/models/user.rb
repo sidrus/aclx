@@ -3,6 +3,8 @@ require 'base64'
 class User < ApplicationRecord
 	has_many :vehicles
 
+	scope :active, -> { User.all.select {|u| !u.inactive? }.sort_by(&:display_name) }
+
 	def self.import_from_upload(file)
 		spreadsheet = open_spreadsheet(file)
 	  import(spreadsheet)
