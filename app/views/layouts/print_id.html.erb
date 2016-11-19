@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ID Card for <%= @user.full_name %></title>
+    <% if @user %>
+      <title>ID Card for <%= @user.full_name %></title>
+    <% else %>
+      <title>Print Multiple IDs</title>
+    <% end %>
     <%= csrf_meta_tags %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
